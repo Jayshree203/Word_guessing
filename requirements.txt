@@ -1,2 +1,4 @@
 # No external dependencies required
 # This game uses only Python standard library 
+Flask==3.0.2
+gunicorn==21.2.0 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .word {
+            font-size: 2em;
+            letter-spacing: 5px;
+            margin: 20px 0;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 30px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .info {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        .game-over {
+            color: #ff4444;
+        }
+        .win {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello, {{ name }}!</h1>
+        
+        <div class="word">{{ display_word }}</div>
+        
+        {% if not game_over and not game_won %}
+            <form action="{{ url_for('make_guess') }}" method="post">
+                <input type="text" name="guess" maxlength="1" pattern="[A-Za-z]" required autofocus>
+                <br>
+                <button type="submit">Guess</button>
+            </form>
+        {% endif %}
+        
+        <div class="info">
+            <p>Guessed letters: {{ guesses }}</p>
+            <p>Remaining guesses: {{ turns }}</p>
+        </div>
+        
+        {% if game_won %}
+            <h2 class="win">Congratulations! You Won! 🎉</h2>
+            <p>The word was: {{ word }}</p>
+            <a href="{{ url_for('index') }}"><button>Play Again</button></a>
+        {% elif game_over %}
+            <h2 class="game-over">Game Over!</h2>
+            <p>The word was: {{ word }}</p>
+            <a href="{{ url_for('index') }}"><button>Try Again</button></a>
+        {% endif %}
+    </div>
+</body>
+</html> 

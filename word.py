@@ -25,11 +25,11 @@ while turns > 0:
             print(char, end=" ")
 
         else:
-            print("_")
+            print("_", end=" ")
             failed += 1
 
     if failed == 0:
-        print("You Win")
+        print("\nYou Win")
         print("The word is: ", word)
         break
 
@@ -45,4 +45,5 @@ while turns > 0:
         print("You have", + turns, 'more guesses')
 
         if turns == 0:
-            print("You Loose")
+            print("You Lose")
+            print("The word was:", word)
